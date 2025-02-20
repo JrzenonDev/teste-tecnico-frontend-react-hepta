@@ -1,0 +1,21 @@
+/* Global Reset */
+body {
+  margin: 0;
+  font-family: var(--font-sans, sans-serif);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Root Variables */
+:root {
+  /* Primary Colors */
+  --color-blue: #3251a1;
+  --color-white: #ffffff;
+  --color-danger: #f05d6c;
+  --color-success: #29b530;
+
+  /* Fonts */
+  --font-heading: var(--font-oxanium, 'Oxanium', cursive);
+  --font-sans: var(--font-montserrat, 'Montserrat', sans-serif);
+}
