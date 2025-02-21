@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { Roboto, Montserrat } from 'next/font/google';
 
 const roboto = Roboto({
-  weight: ['100', '500'],
+  weight: ['100', '300', '500'],
   subsets: ['latin'],
   variable: '--font-roboto',
 });
