@@ -1,6 +1,7 @@
 import './globals.css';
 import { theme } from '@/lib/theme-provider';
 import { ThemeProvider } from '@mui/material/styles';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { Roboto, Montserrat } from 'next/font/google';
 
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
   description: 'Previsão do tempo',
 };
 
+const queryClient = new QueryClient();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${roboto.variable} ${montserrat.variable}`}>
       <body>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
