@@ -10,4 +10,18 @@ export const BoxCustomShadow = styled(Box)`
   padding: 16px 24px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
   color: #fff;
+
+  p {
+    font-weight: 300;
+  }
+
+  h5 {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  h6 {
+    font-size: 3.25rem;
+    font-weight: 300;
+  }
 `;
