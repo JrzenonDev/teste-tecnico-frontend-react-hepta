@@ -14,4 +14,5 @@ export const CustomBox = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
 `;

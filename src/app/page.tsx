@@ -1,8 +1,11 @@
 'use client';
 
-import { Paper, styled } from '@mui/material';
+import { Box, Paper, styled } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { CustomBox } from './style';
+import { CardCurrentTemperature } from '@/components/CardCurrentTemperature';
+import { CardCityInformation } from '@/components/CardCityInformation';
+import { CardTemperatureDaysOfWeek } from '@/components/CardTemperatureDaysOfWeek';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -17,18 +20,32 @@ export default function Home() {
   return (
     <main>
       <CustomBox>
-        <Grid container spacing={2} sx={{ width: '100%', margin: '0 auto' }}>
-          <Grid size={8}>
-            <Item>size=8</Item>
+        <Grid
+          container
+          spacing={2}
+          sx={{ width: '100%', margin: '0 auto', padding: '2rem', maxWidth: '100%' }}
+        >
+          <Grid
+            size={12}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <CardCityInformation />
+            <CardCurrentTemperature />
           </Grid>
-          <Grid size={4}>
-            <Item>size=4</Item>
-          </Grid>
-          <Grid size={4}>
-            <Item>size=4</Item>
-          </Grid>
-          <Grid size={8}>
-            <Item>size=8</Item>
+          <Grid size={12}>
+            <Box sx={{ display: 'flex' }}>
+              <CardTemperatureDaysOfWeek />
+              <CardTemperatureDaysOfWeek />
+              <CardTemperatureDaysOfWeek />
+              <CardTemperatureDaysOfWeek />
+              <CardTemperatureDaysOfWeek />
+              <CardTemperatureDaysOfWeek />
+              <CardTemperatureDaysOfWeek />
+            </Box>
           </Grid>
         </Grid>
       </CustomBox>
