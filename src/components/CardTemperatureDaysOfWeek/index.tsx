@@ -1,13 +1,17 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import { CardTemperature } from './style';
+import { Sun } from 'lucide-react';
 
 export function CardTemperatureDaysOfWeek() {
   return (
-    <Box>
+    <CardTemperature>
       <Typography>SUN</Typography>
-      <Typography>ICON</Typography>
+      <Typography>
+        <Sun />
+      </Typography>
       <Typography>20C</Typography>
       <Typography>10C</Typography>
-    </Box>
+    </CardTemperature>
   );
 }
