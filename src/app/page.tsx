@@ -1,22 +1,32 @@
 'use client';
 
-import { Box, Paper, styled } from '@mui/material';
+import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { CustomBox } from './style';
 import { CardCurrentTemperature } from '@/components/CardCurrentTemperature';
 import { CardCityInformation } from '@/components/CardCityInformation';
 import { CardTemperatureDaysOfWeek } from '@/components/CardTemperatureDaysOfWeek';
+import { useQuery } from '@tanstack/react-query';
+import { weatherForecastWebService } from '@/services/web/WeatherForecastWebService';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  boxShadow: theme.shadows[2],
-}));
+interface WeatherForecast {
+  time: string[];
+  weathercode: number[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+}
 
 export default function Home() {
+  const { data, isFetching } = useQuery({
+    queryKey: ['getWeatherForecast'],
+    queryFn: () => weatherForecastWebService.getWeatherForecast(),
+    refetchOnWindowFocus: false,
+  });
+
+  if (isFetching || !data) return <p>Carregando...</p>;
+
+  const { daily } = data as { daily: WeatherForecast };
+
   return (
     <main>
       <CustomBox>
@@ -37,14 +47,16 @@ export default function Home() {
             <CardCurrentTemperature />
           </Grid>
           <Grid size={12}>
-            <Box sx={{ display: 'flex' }}>
-              <CardTemperatureDaysOfWeek />
-              <CardTemperatureDaysOfWeek />
-              <CardTemperatureDaysOfWeek />
-              <CardTemperatureDaysOfWeek />
-              <CardTemperatureDaysOfWeek />
-              <CardTemperatureDaysOfWeek />
-              <CardTemperatureDaysOfWeek />
+            <Box sx={{ display: 'flex', gap: '1rem' }}>
+              {daily.time.map((date, index) => (
+                <CardTemperatureDaysOfWeek
+                  key={date}
+                  date={date}
+                  weatherCode={daily.weathercode[index]}
+                  maxTemp={daily.temperature_2m_max[index]}
+                  minTemp={daily.temperature_2m_min[index]}
+                />
+              ))}
             </Box>
           </Grid>
         </Grid>
