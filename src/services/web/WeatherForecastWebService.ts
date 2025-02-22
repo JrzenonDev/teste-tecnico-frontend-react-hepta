@@ -7,7 +7,7 @@ class WeatherForecastWebService {
         params: {
           latitude: -23.5505,
           longitude: -46.6333,
-          daily: ['temperature_2m_max', 'temperature_2m_min'],
+          daily: ['weathercode', 'temperature_2m_max', 'temperature_2m_min'],
           timezone: 'auto',
         },
       });
