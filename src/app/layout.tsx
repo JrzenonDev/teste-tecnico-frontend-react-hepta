@@ -1,8 +1,9 @@
+'use client';
+
 import './globals.css';
 import { theme } from '@/lib/theme-provider';
 import { ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import type { Metadata } from 'next';
 import { Roboto, Montserrat } from 'next/font/google';
 
 const roboto = Roboto({
@@ -17,11 +18,6 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
-export const metadata: Metadata = {
-  title: 'Clima tempo',
-  description: 'Previsão do tempo',
-};
-
 const queryClient = new QueryClient();
 
 export default function RootLayout({
@@ -31,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${roboto.variable} ${montserrat.variable}`}>
+      <head>
+        <title>Clima Tempo</title>
+      </head>
       <body>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
