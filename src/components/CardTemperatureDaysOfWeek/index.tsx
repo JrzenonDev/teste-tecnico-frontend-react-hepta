@@ -41,8 +41,8 @@ export function CardTemperatureDaysOfWeek({
     <CardTemperature>
       <Typography>{getWeekday(date)}</Typography>
       <Typography>{weather.icon}</Typography>
-      <Typography>{maxTemp.toFixed(1)}°C</Typography>
-      <Typography>{minTemp.toFixed(1)}°C</Typography>
+      <Typography>Max. {maxTemp.toFixed(1)}°C</Typography>
+      <Typography>Min. {minTemp.toFixed(1)}°C</Typography>
     </CardTemperature>
   );
 }
