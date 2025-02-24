@@ -1,6 +1,6 @@
 'use client';
 
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { CustomBox } from './style';
 import { CardCurrentTemperature } from '@/components/CardCurrentTemperature';
@@ -23,44 +23,50 @@ export default function Home() {
     refetchOnWindowFocus: false,
   });
 
-  if (isFetching || !data) return <p>Carregando...</p>;
-
-  const { daily } = data as { daily: WeatherForecast };
+  const daily = data?.daily as WeatherForecast | undefined;
 
   return (
     <main>
-      <CustomBox>
-        <Grid
-          container
-          spacing={2}
-          sx={{ width: '100%', margin: '0 auto', padding: '2rem', maxWidth: '100%' }}
-        >
+      {isFetching || !data ? (
+        <CustomBox>
+          <Box>
+            <CircularProgress sx={{ color: '#fff' }} />
+          </Box>
+        </CustomBox>
+      ) : (
+        <CustomBox>
           <Grid
-            size={12}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
+            container
+            spacing={2}
+            sx={{ width: '100%', margin: '0 auto', padding: '2rem', maxWidth: '100%' }}
           >
-            <CardCityInformation />
-            <CardCurrentTemperature />
+            <Grid
+              size={12}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <CardCityInformation />
+              <CardCurrentTemperature />
+            </Grid>
+            <Grid size={12}>
+              <Box sx={{ display: 'flex', gap: '1rem' }}>
+                {daily?.time.map((date, index) => (
+                  <CardTemperatureDaysOfWeek
+                    key={date}
+                    date={date}
+                    weatherCode={daily.weathercode[index]}
+                    maxTemp={daily.temperature_2m_max[index]}
+                    minTemp={daily.temperature_2m_min[index]}
+                  />
+                ))}
+              </Box>
+            </Grid>
           </Grid>
-          <Grid size={12}>
-            <Box sx={{ display: 'flex', gap: '1rem' }}>
-              {daily.time.map((date, index) => (
-                <CardTemperatureDaysOfWeek
-                  key={date}
-                  date={date}
-                  weatherCode={daily.weathercode[index]}
-                  maxTemp={daily.temperature_2m_max[index]}
-                  minTemp={daily.temperature_2m_min[index]}
-                />
-              ))}
-            </Box>
-          </Grid>
-        </Grid>
-      </CustomBox>
+        </CustomBox>
+      )}
     </main>
   );
 }
